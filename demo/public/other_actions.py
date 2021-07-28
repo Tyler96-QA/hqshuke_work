@@ -86,7 +86,9 @@ class public_method():
             return random.randint(x,y)
         except Exception as msg:
             self.log_output('!!--!!random_int').error('请输入正确的参数：x<y:{}'.format(msg))
-        
+
+    #正则表达式提取固定格式字符串
+      
 
 #测试
 if __name__=='__main__':
