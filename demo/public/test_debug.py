@@ -422,7 +422,8 @@
 #     log = MyLog()
 #     log.my_logger.error('it is my test log message info')
 
-
+a=63.7
+print(int(a))
 
 
 

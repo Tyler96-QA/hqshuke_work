@@ -4,9 +4,6 @@ import os
 
 conf_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),'logging.conf')
 
-
-print(conf_path)
-
 class MyLog(object):
 
     def __init__(self):
