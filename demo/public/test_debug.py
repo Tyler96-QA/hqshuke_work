@@ -383,15 +383,46 @@
 # demo2(a=1,b=2,c=3)
 # demo3('hello','tyler',a='hello',b='tyler')
 
-def serach(**kwargs):
-    for i in kwargs.keys():
-        print(i)
-    for i in kwargs.values():
-        print(i)
-    for key,value in kwargs.items():
-        print('字段{}保存在{}列'.format(key,value))
+# def serach(**kwargs):
+#     for i in kwargs.keys():
+#         print(i)
+#     for i in kwargs.values():
+#         print(i)
+#     for key,value in kwargs.items():
+#         print('字段{}保存在{}列'.format(key,value))
 
-serach(zubie='A',diancha='B')
+# serach(zubie='A',diancha='B')
+# b=55
+# a='ddd%s'%b
+# print(a)
+# import logging
+# from logging import config
+# import os
+
+# public_path=os.path.dirname(os.path.abspath(__file__))
+
+# conf_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),'logging.conf')
+
+
+
+
+# class MyLog(object):
+
+#     def __init__(self):
+
+#         config.fileConfig(conf_path)
+#         self.logger = logging.getLogger('fileAndConsole')
+
+#     @property
+#     def my_logger(self):
+
+#         return self.logger
+
+# if __name__ == '__main__':
+#     log = MyLog()
+#     log.my_logger.error('it is my test log message info')
+
+
 
 
 

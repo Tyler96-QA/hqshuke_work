@@ -12,7 +12,7 @@ class public_method():
         self.logger.setLevel(logging.DEBUG) #低于这个级别将被忽略，后面可以设置输出级别
         # 创建handler和输出级别
         self.output_log = logging.StreamHandler()  # 输出到屏幕的handler
-        self.output_log.setLevel(logging.INFO)  # 输出级别和上面的忽略级别都不一样，可以看一下效果
+        self.output_log.setLevel(logging.INFO)  # 输出级别和上面的忽略级别都不一样
         # 关键参数datefmt自定义日期格式    
         self.ch_formatter = logging.Formatter('%(name)s %(asctime)s {%(levelname)s}:%(message)s',datefmt='%Y-%m-%d %H:%M:%S')
         # 把上面的日志格式和输出到屏幕的handler关联起来
