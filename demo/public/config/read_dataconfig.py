@@ -1,23 +1,44 @@
 import configparser
 import os
 
-data_config_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),'data_config.ini')
+class ReadConfig():
 
-config=configparser.ConfigParser()
+    """
+    读取配置文件数据,配置文件路径默认为当前文件父级目录下的data_config.ini文件
+    如需读取其他配置文件路径，请将参数传入类中
+    """
+    def __init__(self,filepath=None):
 
-config.read(data_config_path,encoding='utf-8')#读取配置文件
+        if filepath:
+            self.configpath=filepath
+        else:
+            self.configpath=os.path.join(os.path.dirname(os.path.abspath(__file__)),'data_config.ini')
+        
+        self.config=configparser.ConfigParser()
+        self.config.read(self.configpath,encoding='utf-8')#读取配置文件
 
-config.sections() #获取sections节点
+    def get_option(self,section,index=None):
+        """获取section下的option值，列表返回，index值具体取第几项"""
+        #判断该section是否存在
+        if self.config.has_section(section):
+            if index:
+                return self.config.options(section)[index]
+            else:
+                return self.config.options(section)
+        else:
+            print('请检查配置文件是否存在该section节点')
 
-config.options('mysql') #获取指定sections的options,即该节点的所有的键：['name', 'host', 'proxy', 'password', 'pool']
+    def get_value(self,section,opthon):
+        """
+        获取某个section节点下option的具体值
+        """
+        if self.config.has_section(section):
+            return self.config.get(section,opthon)
+        else:
+            print('请检查配置文件是否存在该section节点')
 
-config.get('mysql', 'name')  #获取mysql这个section节点下指定option的值,返回为string：admin
-
-config.getint('mysql', 'proxy') #将获取到的值转返回为int型的值:630 type:int
-
-config.getboolean('mysql', 'pool') #将获取到的值返回为布尔值的值：true type:bool
-
-config.getfloat('mysql', 'time') #将获取的值转换为浮点型，返回为float型的值：3.0 type:float
-
-print(config.items('mysql')) #获取指定section下的所有配置信息 [('name', 'admin'), ('host', '255.255.255.0'), ('proxy', '603'), ('password', '123456'), ('pool', 'true'), ('time', '3')]
-
+if __name__=='__main__':
+    read=ReadConfig()
+    # print(read.get_option('mysql',0))
+    # print(read.get_value('mysql','name'))
+    print(read.get_value('url','sit'))
