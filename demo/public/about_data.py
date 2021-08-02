@@ -2,9 +2,25 @@ import xlrd
 from openpyxl import load_workbook
 import pymongo
 import ssl
+import  cx_Oracle
+import os
+import sys
+
+config_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),'config')
+sys.path.append(config_path)
+
+from read_dataconfig import ReadConfig
+
+#文件路径
+data_config_path=os.path.join(config_path,'data_config.ini')
 
 #全局取消证书验证
 ssl._create_default_https_context=ssl._create_unverified_context()
+
+#添加oracle驱动程序
+os.environ['path']=r'D:\instantclient_19_11'
+
+read=ReadConfig()
 
 
 class exceldata():
@@ -272,7 +288,25 @@ retryWrites=true&ssl=true'.format(username,password)
             print('保存数据库数据失败，请检查链接/参数：{}'.format(msg))
 
 
-                
+    #连接oracle数据库 
+    def serach_in_oracle(self,sql):
+        try:
+            #连接
+            self.con = cx_Oracle.connect('{}/{}@{}:{}/{}'.format(read.get_value('oracle','username'),read.get_value('oracle','password'),
+            read.get_value('oracle','host'),read.get_value('oracle','port'),read.get_value('oracle','server_name')))
+            #创建游标
+            self.cursor= self.con.cursor()  
+            #执行sql
+            self.cursor.execute(sql)
+            #获取单条数据
+            self.data=self.cursor.fetchone()
+            print(self.data)
+            self.cursor.close()
+            self.con.close()
+        except Exception as msg:
+            print('请检查连接信息及sql语句是否正确：{}'.format(msg))
+
+
 
 #测试
 if __name__=='__main__':
@@ -283,6 +317,10 @@ if __name__=='__main__':
     # print(a[0]['邮箱'][0:2]=='14')
     # e.search_in_mongodb('atfx-dev-admin','m578A3MGrcR3pRXVU2pA','atfxgm-uat','atfx_ib_links','isDeleted',0,'link',1)
     # e.searchs_for_mongodb('atfx-dev-admin', 'm578A3MGrcR3pRXVU2pA', 'atfxgm-uat', 'atfx_ib_links','isDeleted',0,'currency','markup','leverage','mtGroup','link','spreadType',6,3)
-    path=r'D:\code\tylerhub\demo\registration_process\test_excel_data\all_links.xlsx'
-    e.save_mongodb_data(path,'atfx-dev-admin','m578A3MGrcR3pRXVU2pA','atfxgm-uat','atfx_ib_links',condition='isDeleted',value=0,
-    link='A',currency='B',markup='C',leverage='D',mtGroup='E',spreadType='F',num=6)
+    # path=r'D:\code\tylerhub\demo\registration_process\test_excel_data\all_links.xlsx'
+    # e.save_mongodb_data(path,'atfx-dev-admin','m578A3MGrcR3pRXVU2pA','atfxgm-uat','atfx_ib_links',condition='isDeleted',value=0,
+    # link='A',currency='B',markup='C',leverage='D',mtGroup='E',spreadType='F',num=6)
+    e.serach_in_oracle("SELECT * FROM (SELECT NOTE FROM HQYTZSC.MBMESSAGE WHERE REVMBNO='17688937072'  ORDER BY DTMAKEDATE DESC)  WHERE ROWNUM<2")
+
+
+
