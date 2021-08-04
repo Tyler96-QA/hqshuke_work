@@ -422,8 +422,8 @@
 #     log = MyLog()
 #     log.my_logger.error('it is my test log message info')
 
-a=[('name', 'admin'), ('host', '255.255.255.0'), ('proxy', '603'), ('password', '123456'), ('pool', 'true'), ('time', '3')]
-print(int(a))
+# a=[('name', 'admin'), ('host', '255.255.255.0'), ('proxy', '603'), ('password', '123456'), ('pool', 'true'), ('time', '3')]
+# print(int(a))
 
 
 

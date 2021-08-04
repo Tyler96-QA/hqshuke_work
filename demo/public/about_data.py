@@ -18,7 +18,8 @@ data_config_path=os.path.join(config_path,'data_config.ini')
 ssl._create_default_https_context=ssl._create_unverified_context()
 
 #添加oracle驱动程序
-os.environ['path']=r'D:\instantclient_19_11'
+os.environ['path']=os.path.join(config_path,'instantclient_19_11')
+
 
 read=ReadConfig()
 
@@ -300,9 +301,9 @@ retryWrites=true&ssl=true'.format(username,password)
             self.cursor.execute(sql)
             #获取单条数据
             self.data=self.cursor.fetchone()
-            print(self.data)
             self.cursor.close()
             self.con.close()
+            return self.data
         except Exception as msg:
             print('请检查连接信息及sql语句是否正确：{}'.format(msg))
 
@@ -320,7 +321,7 @@ if __name__=='__main__':
     # path=r'D:\code\tylerhub\demo\registration_process\test_excel_data\all_links.xlsx'
     # e.save_mongodb_data(path,'atfx-dev-admin','m578A3MGrcR3pRXVU2pA','atfxgm-uat','atfx_ib_links',condition='isDeleted',value=0,
     # link='A',currency='B',markup='C',leverage='D',mtGroup='E',spreadType='F',num=6)
-    e.serach_in_oracle("SELECT * FROM (SELECT NOTE FROM HQYTZSC.MBMESSAGE WHERE REVMBNO='17688937072'  ORDER BY DTMAKEDATE DESC)  WHERE ROWNUM<2")
+    print(e.serach_in_oracle("SELECT * FROM (SELECT NOTE FROM HQYTZSC.MBMESSAGE WHERE REVMBNO='17688937072'  ORDER BY DTMAKEDATE DESC)  WHERE ROWNUM<2"))
 
 
 
