@@ -15,27 +15,28 @@ from handlepath import BASEDIR
 common=Commonweb()
 read=ReadConfig()
 log=MyLog()
+print(BASEDIR)
 
-class logintest():
+# class logintest():
 
-    # def test(self):
-    #     print(555)
-    #     log.my_logger.info('执行test444')
-    def __init__(self):
-        common.open_browser()
+#     # def test(self):
+#     #     print(555)
+#     #     log.my_logger.info('执行test444')
+#     def __init__(self):
+#         common.open_browser()
 
-    def logincase(self,type):
-        try:
-            if type=='jc':
-                common.open_web(read.get_value('url', 'jc'))
-                common.web_click('css,ddddd')
-            else:
-                common.open_web(read.get_value('url', 'zsc'))
-        except Exception as msg:
-            common.get_screenpict('test')
-        finally:
-            log.my_logger().info('执行登陆')
+#     def logincase(self,type):
+#         try:
+#             if type=='jc':
+#                 common.open_web(read.get_value('url', 'jc'))
+#                 common.web_click('css,ddddd')
+#             else:
+#                 common.open_web(read.get_value('url', 'zsc'))
+#         except Exception as msg:
+#             common.get_screenpict('test')
+#         finally:
+#             log.my_logger().info('执行登陆')
 
-if __name__ == '__main__':
-    lgo=logintest()
-    lgo.logincase('jc')
+# if __name__ == '__main__':
+#     lgo=logintest()
+#     lgo.logincase('jc')

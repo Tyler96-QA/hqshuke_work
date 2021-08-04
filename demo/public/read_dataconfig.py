@@ -14,7 +14,7 @@ class ReadConfig():
             self.configpath=filepath
         else:
             self.configpath=os.path.join(os.path.dirname(os.path.abspath(__file__)),'config\config.ini')
-        
+            print(os.path.abspath(__file__))
         self.config=configparser.ConfigParser()
         self.config.read(self.configpath,encoding='utf-8')#读取配置文件
 
