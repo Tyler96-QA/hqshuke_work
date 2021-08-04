@@ -425,6 +425,7 @@
 # a=[('name', 'admin'), ('host', '255.255.255.0'), ('proxy', '603'), ('password', '123456'), ('pool', 'true'), ('time', '3')]
 # print(int(a))
 
-
+import datetime
+print(datetime.datetime.now().strftime('%Y-%m-%d'))
 
 

@@ -5,14 +5,12 @@ import ssl
 import  cx_Oracle
 import os
 import sys
+from read_dataconfig import ReadConfig
 
 config_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),'config')
-sys.path.append(config_path)
 
 from read_dataconfig import ReadConfig
 
-#文件路径
-data_config_path=os.path.join(config_path,'data_config.ini')
 
 #全局取消证书验证
 ssl._create_default_https_context=ssl._create_unverified_context()
